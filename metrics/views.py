@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics
 
-# Create your views here.
+from .models import Metric
+from .serializers import MetricSerializer
+
+
+class MetricList(generics.ListAPIView):
+    queryset = Metric.objects.all()
+    serializer_class = MetricSerializer
+    filter_backends = (DjangoFilterBackend,)
